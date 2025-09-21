@@ -1,40 +1,34 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:smart_safety_app/screens/deviation_alert_screen.dart';
-import 'package:smart_safety_app/screens/end_trip_screen.dart';
-import 'package:smart_safety_app/screens/help_screen.dart';
-import 'package:smart_safety_app/screens/privacy_screen.dart';
-import 'package:smart_safety_app/screens/signup_screen.dart';
-import 'package:smart_safety_app/screens/terms_screen.dart';
 
-// Screens
-import 'screens/splash_screen.dart';
-import 'screens/language_screen.dart';
-import 'screens/login_screen.dart';
-import 'screens/signup_screen.dart';
-import 'screens/terms_screen.dart';
-import 'screens/instructions_screen.dart';
-import 'screens/dashboard_screen.dart';
-import 'screens/itinerary_screen.dart';
-import 'screens/map_screen.dart';
-import 'screens/panic_screen.dart';
-import 'screens/profile_screen.dart';
-import 'screens/settings_screen.dart';
-import 'screens/privacy_screen.dart';
-import 'screens/help_screen.dart';
-import 'screens/end_trip_screen.dart';
-import 'screens/deviation_alert_screen.dart';
-
-// Dashboard-linked Screens
-import 'screens/location_status_screen.dart';
-import 'screens/safety_stats_screen.dart';
-import 'screens/emergency_contacts_screen.dart';
-import 'screens/safety_tips_screen.dart';
-
-// Import your new service
+// Firebase and Services
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'services/notification_service.dart';
 
-// Update the main function to be async and initialize Firebase
+// Screens
+import 'package:smart_safety_app/screens/splash_screen.dart';
+import 'package:smart_safety_app/screens/language_screen.dart';
+import 'package:smart_safety_app/screens/login_screen.dart';
+import 'package:smart_safety_app/screens/signup_screen.dart';
+import 'package:smart_safety_app/screens/terms_screen.dart';
+import 'package:smart_safety_app/screens/instructions_screen.dart';
+import 'package:smart_safety_app/screens/dashboard_screen.dart';
+import 'package:smart_safety_app/screens/itinerary_screen.dart';
+import 'package:smart_safety_app/screens/map_screen.dart';
+import 'package:smart_safety_app/screens/panic_screen.dart';
+import 'package:smart_safety_app/screens/profile_screen.dart';
+import 'package:smart_safety_app/screens/settings_screen.dart';
+import 'package:smart_safety_app/screens/privacy_screen.dart';
+import 'package:smart_safety_app/screens/help_screen.dart';
+import 'package:smart_safety_app/screens/end_trip_screen.dart';
+import 'package:smart_safety_app/screens/deviation_alert_screen.dart';
+import 'package:smart_safety_app/screens/location_status_screen.dart';
+import 'package:smart_safety_app/screens/safety_stats_screen.dart';
+import 'package:smart_safety_app/screens/emergency_contacts_screen.dart';
+import 'package:smart_safety_app/screens/safety_tips_screen.dart';
+
 Future<void> main() async {
   // Ensure that Flutter bindings are initialized before calling native code
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,17 +38,18 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // **** ADD THIS LINE ****
   // Initialize the notification service to start listening for alerts
   await NotificationService().initialize();
   
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final Color primaryColor = Color(0xFF2563EB);
-  final Color backgroundColor = Color(0xFFF9FAFB);
-  final Color textColor = Color(0xFF1F2937);
+  const MyApp({super.key});
+
+  final Color primaryColor = const Color(0xFF2563EB);
+  final Color backgroundColor = const Color(0xFFF9FAFB);
+  final Color textColor = const Color(0xFF1F2937);
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +69,7 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
-            padding: EdgeInsets.symmetric(vertical: 14),
+            padding: const EdgeInsets.symmetric(vertical: 14),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -84,32 +79,27 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => SplashScreen(),
-        '/language': (context) => LanguageScreen(),
-        '/login': (context) => LoginScreen(),
-        '/signup': (context) => SignupScreen(),
-        '/terms': (context) => TermsScreen(),
-        '/instructions': (context) => InstructionsScreen(),
-        '/dashboard': (context) => DashboardScreen(),
-        '/itinerary': (context) => ItineraryScreen(),
-        '/map': (context) => MapScreen(),
-        '/panic': (context) => PanicScreen(),
-        '/settings': (context) => SettingsScreen(),
-        '/privacy': (context) => PrivacyScreen(),
-        '/profile': (context) => ProfileScreen(),
-        '/help': (context) => HelpScreen(),
-        '/end': (context) => EndTripScreen(),
-        '/deviation': (context) => DeviationAlertScreen(),
-
-        // Dashboard-linked routes
-        '/location': (context) => LocationStatusScreen(),
-        '/stats': (context) => SafetyStatsScreen(),
-        '/contacts': (context) => EmergencyContactsScreen(),
-        '/tips': (context) => SafetyTipsScreen(),
-        // ignore: equal_keys_in_map
-        '/start': (context) => MapScreen(), // Start Trip
-        // ignore: equal_keys_in_map
-        '/end': (context) => EndTripScreen(), // End Trip
+        '/': (context) => const SplashScreen(),
+        '/language': (context) => const LanguageScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+        '/terms': (context) => const TermsScreen(),
+        '/instructions': (context) => const InstructionsScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
+        '/itinerary': (context) => const ItineraryScreen(),
+        '/map': (context) => const MapScreen(),
+        '/panic': (context) => const PanicScreen(),
+        '/settings': (context) => const SettingsScreen(),
+        '/privacy': (context) => const PrivacyScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/help': (context) => const HelpScreen(),
+        '/end': (context) => const EndTripScreen(),
+        '/deviation': (context) => const DeviationAlertScreen(),
+        '/location': (context) => const LocationStatusScreen(),
+        '/stats': (context) => const SafetyStatsScreen(),
+        '/contacts': (context) => const EmergencyContactsScreen(),
+        '/tips': (context) => const SafetyTipsScreen(),
+        '/start': (context) => const MapScreen(), // Start Trip should likely go to the map
       },
       debugShowCheckedModeBanner: false,
     );
