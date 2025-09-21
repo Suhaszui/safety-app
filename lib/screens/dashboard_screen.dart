@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../services/trip_manager.dart'; // 1. Import your TripManager
+
+// ... inside your widget's build method ...
+
+// 2. Create an instance of the TripManager
+final tripManager = TripManager();
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -219,15 +225,28 @@ class _DashboardScreenState extends State<DashboardScreen>
                   icon: Icons.play_circle_outline,
                   title: 'Start Trip',
                   subtitle: 'Begin your journey',
-                  onTap: () => Navigator.pushNamed(context,
-                      '/map'), // or '/start' if you have a separate screen
+                  onTap: () {
+                  // 3. Call the startTrip() method
+                  print("Start Trip button tapped!");
+                  tripManager.startTrip();
+
+                  // 4. Then navigate to the map screen
+                  Navigator.pushNamed(context, '/map');
+                },
                 ),
-                buildCard(
+               buildCard(
                   icon: Icons.stop_circle_outlined,
                   title: 'End Trip',
                   subtitle: 'Finish and log your trip',
-                  onTap: () => Navigator.pushNamed(context, '/end'),
-                ),
+                  onTap: () {
+                  // 3. Call the stopTrip() method
+                  print("End Trip button tapped!");
+                  tripManager.stopTrip();
+
+                  // 4. Then navigate to the end trip screen
+                  Navigator.pushNamed(context, '/end');
+                },
+               ),
                 buildCard(
                   icon: Icons.contacts_outlined,
                   title: 'Emergency Contacts',

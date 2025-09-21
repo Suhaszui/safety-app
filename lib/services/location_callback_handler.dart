@@ -24,7 +24,7 @@ void callback(LocationDto locationDto) async {
   // IMPORTANT: Replace <YOUR_SERVER_IP> with your computer's actual local IP address.
   // Example: 'http://192.168.1.10:5000/location_ping'
   // Do NOT use 'localhost' or '127.0.0.1' as that will not work from an emulator/phone.
-  final url = Uri.parse('http://<YOUR_SERVER_IP>:5000/location_ping');
+  final url = Uri.parse('http://172.18.213.12:5000/location_ping');
   
   try {
     await http.post(

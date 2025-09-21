@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -30,17 +29,12 @@ import 'package:smart_safety_app/screens/emergency_contacts_screen.dart';
 import 'package:smart_safety_app/screens/safety_tips_screen.dart';
 
 Future<void> main() async {
-  // Ensure that Flutter bindings are initialized before calling native code
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Firebase using the auto-generated options file
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // Initialize the notification service to start listening for alerts
   await NotificationService().initialize();
-  
+
   runApp(const MyApp());
 }
 
@@ -54,6 +48,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Smart Safety App',
       theme: ThemeData(
         scaffoldBackgroundColor: backgroundColor,
@@ -79,30 +74,30 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const SplashScreen(),
-        '/language': (context) => const LanguageScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/signup': (context) => const SignupScreen(),
-        '/terms': (context) => const TermsScreen(),
-        '/instructions': (context) => const InstructionsScreen(),
-        '/dashboard': (context) => const DashboardScreen(),
-        '/itinerary': (context) => const ItineraryScreen(),
-        '/map': (context) => const MapScreen(),
-        '/panic': (context) => const PanicScreen(),
-        '/settings': (context) => const SettingsScreen(),
-        '/privacy': (context) => const PrivacyScreen(),
-        '/profile': (context) => const ProfileScreen(),
-        '/help': (context) => const HelpScreen(),
-        '/end': (context) => const EndTripScreen(),
-        '/deviation': (context) => const DeviationAlertScreen(),
-        '/location': (context) => const LocationStatusScreen(),
-        '/stats': (context) => const SafetyStatsScreen(),
-        '/contacts': (context) => const EmergencyContactsScreen(),
-        '/tips': (context) => const SafetyTipsScreen(),
-        '/start': (context) => const MapScreen(), // Start Trip should likely go to the map
+        // MODIFIED: Removed 'const' from all routes
+        '/': (context) => SplashScreen(),
+        '/language': (context) => LanguageScreen(),
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignupScreen(),
+        '/terms': (context) => TermsScreen(),
+        '/instructions': (context) => InstructionsScreen(),
+        '/dashboard': (context) => DashboardScreen(),
+        '/itinerary': (context) => ItineraryScreen(),
+        '/map': (context) => MapScreen(),
+        '/panic': (context) => PanicScreen(),
+        '/settings': (context) => SettingsScreen(),
+        '/privacy': (context) => PrivacyScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/help': (context) => HelpScreen(),
+        '/end': (context) => EndTripScreen(),
+        '/deviation': (context) => DeviationAlertScreen(),
+        '/location': (context) => LocationStatusScreen(),
+        '/stats': (context) => SafetyStatsScreen(),
+        '/contacts': (context) => EmergencyContactsScreen(),
+        '/tips': (context) => SafetyTipsScreen(),
+        '/start': (context) => MapScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
