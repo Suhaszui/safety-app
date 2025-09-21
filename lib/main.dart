@@ -22,7 +22,10 @@ import 'screens/profile_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/dashboard_screen.dart';
 
-// 2. Update the main function to be async and initialize Firebase
+// Import your new service
+import 'services/notification_service.dart';
+
+// Update the main function to be async and initialize Firebase
 Future<void> main() async {
   // Ensure that Flutter bindings are initialized before calling native code
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +34,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // **** ADD THIS LINE ****
+  // Initialize the notification service to start listening for alerts
+  await NotificationService().initialize();
   
   runApp(MyApp());
 }
@@ -89,3 +96,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
