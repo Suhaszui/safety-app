@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+// 1. Import Firebase Core and the generated options file
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// Your existing screen imports
 import 'package:smart_safety_app/screens/deviation_alert_screen.dart';
 import 'package:smart_safety_app/screens/end_trip_screen.dart';
 import 'package:smart_safety_app/screens/help_screen.dart';
 import 'package:smart_safety_app/screens/privacy_screen.dart';
 import 'package:smart_safety_app/screens/signup_screen.dart';
 import 'package:smart_safety_app/screens/terms_screen.dart';
-
-// Screens
 import 'screens/splash_screen.dart';
 import 'screens/language_screen.dart';
 import 'screens/login_screen.dart';
@@ -19,7 +22,16 @@ import 'screens/profile_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/dashboard_screen.dart';
 
-void main() {
+// 2. Update the main function to be async and initialize Firebase
+Future<void> main() async {
+  // Ensure that Flutter bindings are initialized before calling native code
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase using the auto-generated options file
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(MyApp());
 }
 
