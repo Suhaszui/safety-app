@@ -2,6 +2,11 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:background_locator_2/background_locator.dart';
 import 'package:background_locator_2/settings/android_settings.dart';
 import 'package:background_locator_2/settings/ios_settings.dart';
+
+// **** THIS IS THE MISSING LINE ****
+// This import makes the LocationAccuracy enum available.
+import 'package:background_locator_2/settings/locator_settings.dart';
+
 import 'location_callback_handler.dart';
 
 class TripManager {
@@ -22,12 +27,11 @@ class TripManager {
     }
 
     await BackgroundLocator.registerLocationUpdate(callback,
-        androidSettings: const AndroidSettings(
-          accuracy: LocationAccuracy.HIGH,
+        androidSettings: AndroidSettings(
+          accuracy: LocationAccuracy.HIGH, // This will now be found
           interval: 60,
           distanceFilter: 100,
 
-          // This is the correct structure: a nested object for notification settings
           androidNotificationSettings: AndroidNotificationSettings(
             notificationChannelName: 'Location Tracking',
             notificationTitle: "Trip in Progress",
@@ -35,8 +39,8 @@ class TripManager {
             notificationIcon: 'mipmap/ic_launcher',
           ),
         ),
-        iosSettings: const IOSSettings(
-          accuracy: LocationAccuracy.HIGH,
+        iosSettings: IOSSettings(
+          accuracy: LocationAccuracy.HIGH, // This will now be found
           distanceFilter: 100,
           showsBackgroundLocationIndicator: true,
         ));
