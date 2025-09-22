@@ -20,10 +20,13 @@ class _SplashScreenState extends State<SplashScreen>
   ];
 
   int quoteIndex = 0;
+  Timer? quoteTimer;
 
   @override
   void initState() {
     super.initState();
+
+    // Logo animation setup
     _logoController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
@@ -34,22 +37,23 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _logoController.forward();
 
-    Timer.periodic(Duration(seconds: 2), (timer) {
+    // Quote rotation
+    quoteTimer = Timer.periodic(Duration(seconds: 2), (timer) {
       setState(() {
         quoteIndex = (quoteIndex + 1) % quotes.length;
       });
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Timer(Duration(seconds: 5), () {
-        Navigator.pushReplacementNamed(context, '/language');
-      });
+    // Navigate after delay
+    Future.delayed(Duration(seconds: 5), () {
+      Navigator.pushReplacementNamed(context, '/language');
     });
   }
 
   @override
   void dispose() {
     _logoController.dispose();
+    quoteTimer?.cancel();
     super.dispose();
   }
 
@@ -98,14 +102,17 @@ class _SplashScreenState extends State<SplashScreen>
               SizedBox(height: 8),
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 600),
-                child: Text(
-                  quotes[quoteIndex],
+                child: SizedBox(
                   key: ValueKey(quoteIndex),
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    color: Colors.white70,
+                  width: 300,
+                  child: Text(
+                    quotes[quoteIndex],
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ],

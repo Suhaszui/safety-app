@@ -28,6 +28,8 @@ import 'package:smart_safety_app/screens/safety_stats_screen.dart';
 import 'package:smart_safety_app/screens/emergency_contacts_screen.dart';
 import 'package:smart_safety_app/screens/safety_tips_screen.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
